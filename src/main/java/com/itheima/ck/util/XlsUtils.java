@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class XlsUtils {
@@ -24,7 +26,8 @@ public class XlsUtils {
             if (hssfSheet == null) {
                 continue;
             }
-
+            // 完整一行
+            List<Map<Integer, String>> complateLine = new ArrayList<>();
             for (int rowNum = 0; rowNum < hssfSheet.getLastRowNum(); rowNum++) {
                 //Row
                 HSSFRow hssfRow = hssfSheet.getRow(rowNum);
@@ -40,13 +43,21 @@ public class XlsUtils {
                     String cellValue = getCellValue(cell);
                     cellData.put(cellIndex, cellValue);
                 }
-                hock.hock(cellData, rowNum);
+                if(hock.hasMore(cellData)) {
+                    complateLine.add(cellData);
+                    continue;
+                } else {
+                    hock.hock(complateLine, rowNum);
+                    // 清除完整的一行数据
+                    complateLine.clear();
+                }
             }
         }
         workbook.close();
     }
 
     private static String getCellValue(HSSFCell cell) {
+        if(cell == null) return null;
         switch (cell.getCellTypeEnum()) {
             case NUMERIC:
             case BOOLEAN:

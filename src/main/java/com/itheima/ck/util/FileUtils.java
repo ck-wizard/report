@@ -7,10 +7,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermission;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 // 文件工具
 public class FileUtils {
@@ -126,13 +123,40 @@ public class FileUtils {
      */
     public static void readLine(InputStream is, String splitCharacter, TxtHock hock) {
         Scanner scanner = new Scanner(is);
-        int row = 1;
+        int row = 0;
+        List<String[]> complateLine = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] cellData = line.split(splitCharacter);
-            hock.hock(cellData, row);
             row++;
+            if(hock.hasMore(line)) {
+                complateLine.add(cellData);
+                continue;
+            } else {
+                hock.hock(complateLine, row);
+                complateLine.clear();
+            }
         }
+    }
+
+    public static void write(InputStream is, String dir, String fileName) throws IOException {
+        File dirFile = new File(dir);
+        if(!dirFile.exists()) {
+            if(!dirFile.mkdirs()) {
+                throw new IOException("创建目录"+ dir +"失败");
+            }
+        }
+        File file = new File(dir, fileName);
+        if(file.exists()) {
+            if(!file.delete()) {
+                //删除失败了
+                throw new IOException("删除文件" + fileName + "失败");
+            }
+        }
+        OutputStream os = new FileOutputStream(file);
+        byte[] read = FileUtils.read(is, 2048);
+        os.write(read);
+        os.close();
     }
 
 }
