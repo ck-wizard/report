@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
 // 文件工具
@@ -114,6 +115,23 @@ public class FileUtils {
             Files.setPosixFilePermissions(path, perms);
         } catch (Exception e) {
             logger.info("Change folder " + path + " permission failed.");
+        }
+    }
+
+    /**
+     * 以钩子的形式 一行一行的读数据
+     * @param is
+     * @param splitCharacter
+     * @param hock
+     */
+    public static void readLine(InputStream is, String splitCharacter, TxtHock hock) {
+        Scanner scanner = new Scanner(is);
+        int row = 1;
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] cellData = line.split(splitCharacter);
+            hock.hock(cellData, row);
+            row++;
         }
     }
 

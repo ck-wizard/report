@@ -55,7 +55,7 @@ public class ZipTest {
                 continue;
 
             // 组装信息
-            // 文件名|本行|跨行|几号|状态
+            // 文件名|本行/跨行|几号|状态
             Map<String, String> saveInfoMap = null;
             //记录要保存的信息
             save(saveInfoMap);
@@ -72,7 +72,10 @@ public class ZipTest {
     // 读取txt
     public static void readTxt(InputStream is) throws IOException {
         BufferedInputStream bis = new BufferedInputStream(is);
-        FileUtils.read(bis, 1024);
+
+        FileUtils.readLine(bis, " ",  (a1, row) -> {
+
+        });
         bis.close();
     }
 
