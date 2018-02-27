@@ -1,5 +1,8 @@
-package com.itheima.ck.util;
+package com.itheima.ck.util.hock;
 
+import com.itheima.ck.bean.VendorSubInfoModel;
+
+import java.io.IOException;
 import java.util.List;
 
 public interface TxtHock {
@@ -10,7 +13,7 @@ public interface TxtHock {
      * @param cellData 行数据
      * @param row 行号
      */
-    void hock(List<String[]> cellData, int row);
+    void hock(List<String[]> cellData, int row) throws IOException;
 
     /**
      * 读取一行后进行判断,是否还有,
@@ -18,4 +21,6 @@ public interface TxtHock {
      * @return 如果为true表示继续读,返回false表示不继续读取.
      */
     boolean hasMore(String line);
+
+    List<VendorSubInfoModel> getData();
 }

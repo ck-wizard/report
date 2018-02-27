@@ -1,5 +1,8 @@
 package com.itheima.ck.util;
 
+import com.itheima.ck.util.hock.DirHock;
+import com.itheima.ck.util.hock.FileIteraHock;
+import com.itheima.ck.util.hock.TxtHock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,6 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 // 文件工具
 public class FileUtils {
@@ -121,25 +127,32 @@ public class FileUtils {
      * @param splitCharacter
      * @param hock
      */
-    public static void readLine(InputStream is, String splitCharacter, TxtHock hock) {
-        Scanner scanner = new Scanner(is);
+    public static void readLine(InputStream is, String splitCharacter, TxtHock hock) throws IOException{
+        Scanner scanner = new Scanner(is, "gb2312");
         int row = 0;
         List<String[]> complateLine = new ArrayList<>();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             String[] cellData = line.split(splitCharacter);
             row++;
+
             if(hock.hasMore(line)) {
-                complateLine.add(cellData);
-                continue;
+                complateLine.add(new String[]{line});
             } else {
+                complateLine.add(cellData);
                 hock.hock(complateLine, row);
                 complateLine.clear();
             }
         }
+        scanner.close();
     }
 
     public static void write(InputStream is, String dir, String fileName) throws IOException {
+        byte[] read = FileUtils.read(is, 2048);
+        write(read, dir, fileName);
+    }
+
+    public static void write(byte[] read, String dir, String fileName) throws IOException {
         File dirFile = new File(dir);
         if(!dirFile.exists()) {
             if(!dirFile.mkdirs()) {
@@ -153,10 +166,59 @@ public class FileUtils {
                 throw new IOException("删除文件" + fileName + "失败");
             }
         }
+
+        write(read, file);
+    }
+
+    public static void write(byte[] read, File file) throws IOException {
         OutputStream os = new FileOutputStream(file);
-        byte[] read = FileUtils.read(is, 2048);
         os.write(read);
         os.close();
     }
 
+
+
+    /**
+     * 文本遍历工具
+     * @param dirFile 需要迭代的目录
+     * @param hock 钩子
+     */
+    public static void iterable(File dirFile, FileIteraHock hock) {
+        //File dirFile = new File(dir);
+        if(dirFile.isDirectory()) {
+            File[] files = dirFile.listFiles();
+            for(File itemFile : files) {
+                if(itemFile.isDirectory()) {
+                    iterable(itemFile, hock);
+                }
+                hock.hock(itemFile);
+            }
+        } else {
+            hock.hock(dirFile);
+        }
+
+    }
+
+
+    public static File createFile(String dirPath, String fileName) throws IOException {
+        File file = new File(dirPath, fileName);
+        if(!file.exists()) {
+            if(!file.createNewFile()) {
+                // 创建目录失败了.
+                throw new IOException("创建文件"+file.getAbsolutePath()+"失败了");
+            }
+        }
+        return file;
+    }
+
+    public static File createDir(String dirPath, String subDirPath) throws IOException {
+        File vendorDir = new File(dirPath, subDirPath);
+        if(!vendorDir.exists()) {
+            if(!vendorDir.mkdir()) {
+                // 创建目录失败了.
+                throw new IOException("创建文件夹"+vendorDir+"失败了");
+            }
+        }
+        return vendorDir;
+    }
 }

@@ -1,13 +1,12 @@
 package com.itheima.ck.util;
 
+import com.itheima.ck.util.hock.XlsHock;
 import com.sun.istack.internal.NotNull;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class XlsUtils {
-    public static void readExcel2003Or2007(InputStream is, @NotNull XmlHock hock) throws IOException {
+    public static void readExcel2003Or2007(InputStream is, @NotNull XlsHock hock) throws IOException {
         //Excel
         HSSFWorkbook workbook = new HSSFWorkbook(is);
 
@@ -28,6 +27,7 @@ public class XlsUtils {
             }
             // 完整一行
             List<Map<Integer, String>> complateLine = new ArrayList<>();
+
             for (int rowNum = 0; rowNum < hssfSheet.getLastRowNum(); rowNum++) {
                 //Row
                 HSSFRow hssfRow = hssfSheet.getRow(rowNum);
@@ -35,7 +35,7 @@ public class XlsUtils {
                     continue;
                 }
                 // 获取最后一个单元格+1的值
-                int cellNum = hssfSheet.getLastRowNum();
+                int cellNum = hssfRow.getLastCellNum();
                 Map<Integer, String> cellData = new HashMap<>();
                 for (Integer cellIndex = 0; cellIndex < cellNum; cellIndex++) {
                     //Cell
@@ -43,8 +43,8 @@ public class XlsUtils {
                     String cellValue = getCellValue(cell);
                     cellData.put(cellIndex, cellValue);
                 }
+                complateLine.add(cellData);
                 if(hock.hasMore(cellData)) {
-                    complateLine.add(cellData);
                     continue;
                 } else {
                     hock.hock(complateLine, rowNum);

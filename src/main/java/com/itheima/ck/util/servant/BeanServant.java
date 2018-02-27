@@ -1,5 +1,6 @@
 package com.itheima.ck.util.servant;
 
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -9,19 +10,25 @@ import java.util.Map;
 public interface BeanServant<T> {
 
     /**
-     * 读取跨行
+     * 读取跨行零售
      * @param t 当前读取的bean, 若检查读取字段包括清算日志,那么新创建bean,返回新的bean
      * @param map 数据
      * @return
      */
-    T transferOther(T t, Map<Integer, String> map);
+    T transferXls(T t, Map<Integer, String> map);
 
     /**
-     * 读取本行
+     * 读取本行零售
      * @param t 当前读取的bean, 若检查读取字段包括清算日志,那么新创建bean,返回新的bean
      * @param lists 数据
      * @return
      */
-    T transferSelf(T t, String[] lists);
+    T transferTxt(T t, String[] lists);
+
+    /**
+     * 格式输出
+     * @param t
+     */
+    void formatPrint(PrintWriter pw, T t);
 
 }
