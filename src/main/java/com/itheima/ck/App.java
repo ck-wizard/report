@@ -16,7 +16,7 @@ public class App {
     public static void main(String[] args) {
         OperateStep step_0 = new EmptyStep();
         OperateStep step_2 = new VendorReportDailyStoreStep(step_0);
-       // OperateStep step_1 = new ZipOperateStep(step_2);
+        OperateStep step_1 = new ZipOperateStep(step_2);
         // 配置文件
         ReportBuilderStepSubResult subResult = new ReportBuilderStepSubResult();
         subResult.zipConfig.fileDir = "C:\\Java\\测试数据\\201801\\";

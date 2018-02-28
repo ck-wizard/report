@@ -1,7 +1,6 @@
 package com.itheima.ck.bean;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 public class MonthTransferModel implements Serializable {
     private String vendorId;
@@ -11,24 +10,24 @@ public class MonthTransferModel implements Serializable {
     private String cardno;
     private String paymentDate;
     private String tranType;
-    private BigDecimal buyamt;
-    private BigDecimal hyamt;
-    private BigDecimal yqsamt;
-    private BigDecimal scorecost;
-    private BigDecimal scoremoney;
-    private BigDecimal sfamt;
+    private String buyamt;
+    private String hyamt;
+    private String yqsamt;
+    private String scorecost;
+    private String scoremoney;
+    private String sfamt;
     private String authcode;
     private String singletrans;
     private String transferChannel;
     private String prodType;
-    private BigDecimal cardBonusMoney;
-    private BigDecimal cardReduceMoney;
+    private String cardBonusMoney;
+    private String cardReduceMoney;
     private String caculateDate;
     private String orderType;
     private String transSn;
-    private BigDecimal allScorePurchase;
-    private BigDecimal allScoreCleanWithInner;
-    private BigDecimal allScoreReducePrice;
+    private String allScorePurchase;
+    private String allScoreCleanWithInner;
+    private String allScoreReducePrice;
     private int totalCount;
 
     public String getVendorId() {
@@ -87,51 +86,51 @@ public class MonthTransferModel implements Serializable {
         this.tranType = tranType;
     }
 
-    public BigDecimal getBuyamt() {
+    public String getBuyamt() {
         return buyamt;
     }
 
-    public void setBuyamt(BigDecimal buyamt) {
+    public void setBuyamt(String buyamt) {
         this.buyamt = buyamt;
     }
 
-    public BigDecimal getHyamt() {
+    public String getHyamt() {
         return hyamt;
     }
 
-    public void setHyamt(BigDecimal hyamt) {
+    public void setHyamt(String hyamt) {
         this.hyamt = hyamt;
     }
 
-    public BigDecimal getYqsamt() {
+    public String getYqsamt() {
         return yqsamt;
     }
 
-    public void setYqsamt(BigDecimal yqsamt) {
+    public void setYqsamt(String yqsamt) {
         this.yqsamt = yqsamt;
     }
 
-    public BigDecimal getScorecost() {
+    public String getScorecost() {
         return scorecost;
     }
 
-    public void setScorecost(BigDecimal scorecost) {
+    public void setScorecost(String scorecost) {
         this.scorecost = scorecost;
     }
 
-    public BigDecimal getScoremoney() {
+    public String getScoremoney() {
         return scoremoney;
     }
 
-    public void setScoremoney(BigDecimal scoremoney) {
+    public void setScoremoney(String scoremoney) {
         this.scoremoney = scoremoney;
     }
 
-    public BigDecimal getSfamt() {
+    public String getSfamt() {
         return sfamt;
     }
 
-    public void setSfamt(BigDecimal sfamt) {
+    public void setSfamt(String sfamt) {
         this.sfamt = sfamt;
     }
 
@@ -167,19 +166,19 @@ public class MonthTransferModel implements Serializable {
         this.prodType = prodType;
     }
 
-    public BigDecimal getCardBonusMoney() {
+    public String getCardBonusMoney() {
         return cardBonusMoney;
     }
 
-    public void setCardBonusMoney(BigDecimal cardBonusMoney) {
+    public void setCardBonusMoney(String cardBonusMoney) {
         this.cardBonusMoney = cardBonusMoney;
     }
 
-    public BigDecimal getCardReduceMoney() {
+    public String getCardReduceMoney() {
         return cardReduceMoney;
     }
 
-    public void setCardReduceMoney(BigDecimal cardReduceMoney) {
+    public void setCardReduceMoney(String cardReduceMoney) {
         this.cardReduceMoney = cardReduceMoney;
     }
 
@@ -207,27 +206,27 @@ public class MonthTransferModel implements Serializable {
         this.transSn = transSn;
     }
 
-    public BigDecimal getAllScorePurchase() {
+    public String getAllScorePurchase() {
         return allScorePurchase;
     }
 
-    public void setAllScorePurchase(BigDecimal allScorePurchase) {
+    public void setAllScorePurchase(String allScorePurchase) {
         this.allScorePurchase = allScorePurchase;
     }
 
-    public BigDecimal getAllScoreCleanWithInner() {
+    public String getAllScoreCleanWithInner() {
         return allScoreCleanWithInner;
     }
 
-    public void setAllScoreCleanWithInner(BigDecimal allScoreCleanWithInner) {
+    public void setAllScoreCleanWithInner(String allScoreCleanWithInner) {
         this.allScoreCleanWithInner = allScoreCleanWithInner;
     }
 
-    public BigDecimal getAllScoreReducePrice() {
+    public String getAllScoreReducePrice() {
         return allScoreReducePrice;
     }
 
-    public void setAllScoreReducePrice(BigDecimal allScoreReducePrice) {
+    public void setAllScoreReducePrice(String allScoreReducePrice) {
         this.allScoreReducePrice = allScoreReducePrice;
     }
 

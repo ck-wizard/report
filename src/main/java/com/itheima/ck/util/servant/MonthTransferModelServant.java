@@ -27,21 +27,21 @@ public class MonthTransferModelServant implements BeanServant<MonthTransferModel
         data.setProdType("-");
         data.setTranType(datas.get(4).trim());
         data.setTransferChannel("-");
-        data.setBuyamt(new BigDecimal(datas.get(5).trim()));
-        data.setHyamt(new BigDecimal(datas.get(6).trim()));
-        data.setYqsamt(new BigDecimal(datas.get(7).trim()));
-        data.setScorecost(new BigDecimal(datas.get(9).trim()));
-        data.setScoremoney(new BigDecimal(datas.get(10).trim()));
-        data.setSfamt(new BigDecimal(datas.get(11).trim()));
+        data.setBuyamt((datas.get(5).trim()));
+        data.setHyamt((datas.get(6).trim()));
+        data.setYqsamt((datas.get(7).trim()));
+        data.setScorecost((datas.get(9).trim()));
+        data.setScoremoney((datas.get(10).trim()));
+        data.setSfamt((datas.get(11).trim()));
         data.setAuthcode(datas.get(12).trim());
         data.setSingletrans(datas.get(13).trim());
         data.setTransSn("-");
         data.setOrderId(datas.get(17).trim());
-        data.setCardBonusMoney(new BigDecimal(datas.get(20).trim()));
-        data.setCardReduceMoney(new BigDecimal(datas.get(22).trim()));
-        data.setAllScorePurchase(new BigDecimal(datas.get(24).trim()));
-        data.setAllScoreReducePrice(new BigDecimal(datas.get(25).trim()));
-        data.setAllScoreCleanWithInner(new BigDecimal(datas.get(26).trim()));
+        data.setCardBonusMoney((datas.get(20).trim()));
+        data.setCardReduceMoney((datas.get(22).trim()));
+        data.setAllScorePurchase((datas.get(24).trim()));
+        data.setAllScoreReducePrice((datas.get(25).trim()));
+        data.setAllScoreCleanWithInner((datas.get(26).trim()));
         return data;
     }
 
@@ -55,20 +55,20 @@ public class MonthTransferModelServant implements BeanServant<MonthTransferModel
         data.setProdType("");
         data.setTranType("");
         data.setTransferChannel("");
-        data.setBuyamt(new BigDecimal(datas[3].trim()));
-        data.setHyamt(new BigDecimal(datas[4].trim()));
-        data.setYqsamt(new BigDecimal(datas[9].trim()));
-        data.setCardBonusMoney(new BigDecimal(datas[5].trim()));
-        data.setCardReduceMoney(new BigDecimal(datas[7].trim()));
-        data.setScorecost(new BigDecimal(datas[11].trim()));
-        data.setScoremoney(new BigDecimal(datas[12].trim()));
-        data.setSfamt(new BigDecimal(datas[16].trim()));
+        data.setBuyamt((datas[3].trim()));
+        data.setHyamt((datas[4].trim()));
+        data.setYqsamt((datas[9].trim()));
+        data.setCardBonusMoney((datas[5].trim()));
+        data.setCardReduceMoney((datas[7].trim()));
+        data.setScorecost((datas[11].trim()));
+        data.setScoremoney((datas[12].trim()));
+        data.setSfamt((datas[16].trim()));
         data.setSingletrans(datas[18].trim());
         data.setOrderId(null);
         data.setTransSn(datas[17].trim());
-        data.setAllScorePurchase(BigDecimal.ZERO);
-        data.setAllScoreReducePrice(BigDecimal.ZERO);
-        data.setAllScoreCleanWithInner(BigDecimal.ZERO);
+        data.setAllScorePurchase("-");
+        data.setAllScoreReducePrice("-");
+        data.setAllScoreCleanWithInner("-");
         return data;
     }
 
